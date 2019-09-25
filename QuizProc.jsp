@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@include file="/Quiz.jsp" %>
     <%@page import="java.sql.*"%>
+    <<jsp:include page="Quiz.jsp">
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,20 @@
 </head>
 <body>
 <% 
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		conn = DriverManager.getConnection(url, id2, pwd);
-		
+try{
+	String id = (String) session.getAttribute("id");
+	request.setCharacterEncoding("UTF-8");
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	String id2 = "EVENT";
+	String pwd = "1234";
+	ResultSet rs = null;
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+
+	Class.forName("oracle.jdbc.driver.OracleDriver");
+	conn = DriverManager.getConnection(url, id2, pwd);
+	String[] Answer={"둥지냉면","곰탕","소방관","무파마","더워","책피자","아야","아이럽우유","다이빙","회오리"};	
+	String ramdom = request.getParameter("random");
 	String answer = request.getParameter("answer");
 	if (answer.equals(Answer[random])) {
 		pstmt=conn.prepareStatement("update mypage set point=point+10 = (select * from table member where mypage.tel = member.tel and member.id=?"); //sql문을 똑같이 적어주면 된다.
@@ -29,7 +40,10 @@
 		alert("틀렸습니다");
 		window.history.back();
 		</script>
-	<%}
+	<%} 
+}catch(Exception e){
+		e.printStackTrace();
+	}
 	%>
 </body>
 </html>

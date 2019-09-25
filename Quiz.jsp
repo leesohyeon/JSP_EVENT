@@ -12,6 +12,7 @@
 
 	<center>
 		<% 
+		//랜덤값 quizproc로 넘기기처리
 		try{
 		String id = (String) session.getAttribute("id");
 		request.setCharacterEncoding("UTF-8");
@@ -37,6 +38,7 @@ String[] Answer={"둥지냉면","곰탕","소방관","무파마","더워","책�
 		<h2><%= Quiz[random] %></h2>
 		<input type=text name=answer>
 		<input type="submit" value="정답확인" >
+		 
 	</form>
 	<%
 		}catch(Exception e){

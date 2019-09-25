@@ -24,7 +24,8 @@
 </head>
 <body>
     <h3 align = "center">
-    <%=id%>로 로그인 하셨습니다
+    <%=id%>로 로그인 하셨습니다 &nbsp;&nbsp;&nbsp;
+    <a href="logout.jsp">로그아웃</a>
     </h3>
     
     <%	request.setCharacterEncoding("UTF-8");
