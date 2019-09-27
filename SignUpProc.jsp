@@ -24,7 +24,14 @@
 		String id2 = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String tel = request.getParameter("tel");
-
+	if(id2.equals("admin")){
+		%>
+		<script>
+		alert("관리자계정은 회원가입이 되지않습니다 \n 아이디를 다시 설정해주세요");
+		window.history.back();
+		</script>
+	<%
+	}else{
 		String sql = "insert into member values (?,?,?,?)";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, name);
@@ -39,10 +46,12 @@
 		pstmt.executeUpdate();
 		
 	%>
-	회원가입 성공
-	<br>
-	<a href="index.jsp">홈으로
-		</button> <%
+		<script>
+		alert("회원가입이 완료되었습니다");
+		location.href='index.jsp';
+		</script>
+	<%
+	}
  	}catch(Exception e){
  		e.printStackTrace();
  		}

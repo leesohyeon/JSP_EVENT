@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@page import="java.sql.*"%>
-    <<jsp:include page="Quiz.jsp">
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,18 +21,30 @@ try{
 
 	Class.forName("oracle.jdbc.driver.OracleDriver");
 	conn = DriverManager.getConnection(url, id2, pwd);
+	conn.setAutoCommit(false);
 	String[] Answer={"둥지냉면","곰탕","소방관","무파마","더워","책피자","아야","아이럽우유","다이빙","회오리"};	
-	String ramdom = request.getParameter("random");
+	int ramdom = Integer.parseInt(request.getParameter("random"));
 	String answer = request.getParameter("answer");
-	if (answer.equals(Answer[random])) {
-		pstmt=conn.prepareStatement("update mypage set point=point+10 = (select * from table member where mypage.tel = member.tel and member.id=?"); //sql문을 똑같이 적어주면 된다.
-	      pstmt.setString(1,id);
-	      pstmt.executeQuery();
+	if (answer.equals(Answer[ramdom])) {
+		try {
+			String sql = "update mypage set point=point+10 where tel=(select member.tel from member, mypage where mypage.tel = member.tel and member.id=?)";
+			pstmt=conn.prepareStatement(sql); //sql문을 똑같이 적어주면 된다.
+			pstmt.setString(1, id);
+			int su = pstmt.executeUpdate();
+			conn.commit();
+		} catch(Exception e) {
+			e.printStackTrace();
+			conn.rollback();
+		}
+		
 		%>
 		<script>
 		alert("정답입니다 \n 포인트가 적립되었습니다");
 		</script>
 	<%
+	out.println("<script>");
+	out.println("location.href='login_Temp.jsp'"); 
+	out.println("</script>");
 	} else {
 		%>
 		<script>

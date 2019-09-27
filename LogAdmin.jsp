@@ -25,7 +25,8 @@
 <body>
 <link rel="stylesheet" href="css.css">
     <h3 align = "center">
-    <%=id%>로 로그인 하셨습니다 
+    <%=id%>로 로그인 하셨습니다 &nbsp;&nbsp;&nbsp;
+    <a href="logout.jsp">로그아웃</a>
     </h3>
     
     <%	request.setCharacterEncoding("UTF-8");
@@ -41,15 +42,14 @@
 
      try{
       
-      pstmt=conn.prepareStatement("select mypage.*,member.name from mypage, member where mypage.tel = member.tel and member.id=?"); //sql문을 똑같이 적어주면 된다.
-      pstmt.setString(1,id);
+      pstmt=conn.prepareStatement("select mypage.*,member.name from mypage, member where mypage.tel = member.tel"); 
       rs=pstmt.executeQuery();
       
       while(rs.next()) { 
         %>        
         <center>
-        <h2>나의 정보</h2>
-        <table border ="1" align="center">
+        <h2>회원 정보</h2>
+        <table border ="1" align="center" >
         <tr>
                 <td>이름:</td><td><%=rs.getString("name")%></td>
             </tr>
@@ -57,12 +57,10 @@
                 <td>전화번호:</td><td><%=rs.getString("tel")%></td>
             </tr>
             <tr>
-                <td>포인트:</td><td><%=rs.getInt("point")%></td>
-                
+                <td>포인트:</td><td><%=rs.getString("point")%></td>
             </tr>
             <tr>
-                <td rowspan=3>당첨내역:</td>
-                <td><%=rs.getString("coupon1") %></td>
+                <td rowspan=3>당첨내역:</td><td><%=rs.getString("coupon1") %></td>
             </tr>
             <tr>
                 <td><%=rs.getString("coupon2") %></td>
@@ -71,9 +69,9 @@
                 <td><%=rs.getString("coupon3") %></td>
            </tr>
         </table>
-        <br>
-        <a href="Quiz_Temp.jsp">>퀴즈 풀러 가기!</a>
-        <a href="UseCoupon_Temp.jsp">>쿠폰 쓰기</a>
+    
+    </center>
+        
         
     <%
         }
@@ -81,7 +79,5 @@
             e.printStackTrace();
         }
     %>
-    
-    </center>
 </body>
 </html>

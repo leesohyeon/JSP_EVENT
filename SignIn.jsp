@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<link rel="stylesheet" href="css.css">
 <center>
 <form action="SignInProc.jsp" method="post">
 <table>
