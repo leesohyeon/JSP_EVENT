@@ -22,11 +22,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Join Main</title>
 </head>
-<body>
+<body class="main_Back">
 <link rel="stylesheet" href="css.css">
-    <h3 align = "center">
-    <%=id%>로 로그인 하셨습니다 
-    </h3>
+   
     
     <%	request.setCharacterEncoding("UTF-8");
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -44,36 +42,48 @@
       pstmt=conn.prepareStatement("select mypage.*,member.name from mypage, member where mypage.tel = member.tel and member.id=?"); //sql문을 똑같이 적어주면 된다.
       pstmt.setString(1,id);
       rs=pstmt.executeQuery();
-      
+      String nul="없음";
       while(rs.next()) { 
+    	  String cou1= rs.getString("coupon1");
+    	  String cou2=rs.getString("coupon2");
+    	  String cou3=rs.getString("coupon3");
+    	  if(cou1==null){
+    		  cou1=nul;
+    	  }if(cou2==null){
+    		  cou2=nul;
+    	  }if(cou3==null){
+    		  cou3=nul;
+    	  }
         %>        
         <center>
         <h2>나의 정보</h2>
-        <table border ="1" align="center">
+        <table align="center" cellspacing="10px" cellpadding="10px">
         <tr>
-                <td>이름:</td><td><%=rs.getString("name")%></td>
+                <td width="100px">이름:</td><td width="120px"style="border-bottom: 2px solid #fe5e72" colspan=2><%=rs.getString("name")%></td>
             </tr>
                     <tr>
-                <td>전화번호:</td><td><%=rs.getString("tel")%></td>
+                <td>전화번호:</td><td colspan=2 style="border-bottom: 2px solid #fe5e72"><%=rs.getString("tel")%></td>
             </tr>
             <tr>
-                <td>포인트:</td><td><%=rs.getInt("point")%></td>
+                <td>포인트:</td><td colspan=2 style="border-bottom: 2px solid #fe5e72"><%=rs.getInt("point")%></td>
                 
             </tr>
             <tr>
                 <td rowspan=3>당첨내역:</td>
-                <td><%=rs.getString("coupon1") %></td>
+                <td ><%= cou1 %></td>
+                <td><input type="button" value="사용" class="button" onclick="location.href='UseCoupon.jsp?c=<%=cou1%>&cou=coupon1'"></td>
             </tr>
             <tr>
-                <td><%=rs.getString("coupon2") %></td>
+                <td><%= cou2 %></td>
+                <td><input type="button" value="사용" class="button" onclick="location.href='UseCoupon.jsp?c=<%=cou2%>&cou=coupon2'"></td>
            </tr>
             <tr>
-                <td><%=rs.getString("coupon3") %></td>
+                <td><%= cou3 %></td>
+                <td><input type="button" value="사용" class="button" onclick="location.href='UseCoupon.jsp?c=<%=cou3%>&cou=coupon3'"></td>
            </tr>
         </table>
         <br>
         <a href="Quiz_Temp.jsp">>퀴즈 풀러 가기!</a>
-        <a href="UseCoupon_Temp.jsp">>쿠폰 쓰기</a>
         
     <%
         }

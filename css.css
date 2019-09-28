@@ -1,6 +1,87 @@
 @charset "UTF-8";
-html body{
-	font-family:'나눔스퀘어라운드 Regular';
-	margin:0;
-	padding:0;
+
+html, body {
+	font-family: '나눔스퀘어라운드 Regular';
+	margin: 0;
+	padding: 0;
+	vertical-align: center;
+}
+
+body a {
+	text-decoration: none;
+}
+
+a:link {
+	text-decoration: none;
+	color: #fe5e72;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #fe5e72;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #000000;
+}
+
+.top a {
+	text-color: white;
+}
+
+.menu {
+	margin-left: 10%;
+}
+
+.top .menu a {
+	text-color: white;
+}
+
+.sign {
+	border: none;
+	border-bottom: 2px solid #fe5e72;
+}
+
+.td {
+	text-align: center;
+}
+
+.button {
+	border-radius: 3px;
+	border: 1px solid #fe5e72;
+	color: #fe5e72;
+	background-color: white;
+	padding: 7px;
+}
+
+.button:hover {
+	color: white;
+	background-color: #fe5e72;
+}
+
+
+div.custom input[type='radio']:before {
+	   appearance: none;
+        content: '';
+        display:inline-block;
+        width: 1rem;
+  		height:1rem;
+        border-radius: 100%;
+        margin-top:-3px;
+        background-color: white;
+ 		border: 2px solid #fe5e72;
+    }
+div.custom input[type="radio"]:checked:before {
+        background: #fe5e72;
+        width: 1rem;
+  		height:1rem;
+    }
+    
+div.custom input[type='radio']:checked {
+  background-color: #fe5e72;
+   width: 0.7rem;
+  height:0.7rem;
+  display:inline-block;
+  
 }

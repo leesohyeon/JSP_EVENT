@@ -12,15 +12,17 @@
 <center>
 
 <% 
+
 String contentpage=request.getParameter("CONTENTPAGE");
 %>
 
-<table width="100%" height="800px" border="1" cellpadding="2" cellspacing="0">
+<table width="100%" height="800px" cellpadding="2" cellspacing="0">
 <tr>
-<td><jsp:include page="top.jsp" flush="false"/> </td>
+<td><jsp:include page="top.jsp" flush="false" /> </td>
+
 </tr>
 <tr>
-<td width="600" valign="top" height="100%"> <jsp:include page="<%= contentpage %>" flush="false"/> </td>
+<td width="600" valign="top" height="800px"> <jsp:include page="<%= contentpage %>" flush="false"/> </td>
 </tr>
 </table>
 </center>
